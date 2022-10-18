@@ -1,3 +1,4 @@
+const { response } = require('express')
 const express=require('express')
 const router=express.Router()
 //linking to the model folder 
@@ -6,8 +7,9 @@ const Article=require('./../models/article')
 router.get('/new', (req,res)=>{
     res.render('articles/new', {article:new Article()})
 })
-router.get('/:id',(req,res,)=>{
-    const article= Article.findById(req.params.id)
+router.get('/:id', async (req,res,)=>{
+    const article= await Article.findById(req.params.id)
+    if (article==null) response.redirect('/')
 res.render('articles/show',{article:article})
 })
 
