@@ -7,7 +7,8 @@ router.get('/new', (req,res)=>{
     res.render('articles/new', {article:new Article()})
 })
 router.get('/:id',(req,res,)=>{
-res.send(req.params.id)
+    const article= Article.findById(req.params.id)
+res.render('articles/show',{article:article})
 })
 
 router.post('/', async(req,res)=>{
