@@ -7,8 +7,8 @@ const Article=require('./../models/article')
 router.get('/new', (req,res)=>{
     res.render('articles/new', {article:new Article()})
 })
-router.get('/:id', async (req,res,)=>{
-    const article= await Article.findById(req.params.id)
+router.get('/:slug', async (req,res,)=>{
+    const article= await Article.findOne({slug:req.params.slug})
     if (article==null) response.redirect('/')
 res.render('articles/show',{article:article})
 })
@@ -22,7 +22,7 @@ let article=new Article({
 //This is asynchronous process.
 try{
     article=await article.save()
-    res.redirect(`/articles/${article.id}`)
+    res.redirect(`/articles/${article.slug}`)
 }catch(e){
 res.render('articles/new',{article:article})
 }
