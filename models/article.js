@@ -1,5 +1,6 @@
 const mongoose=require('mongoose')
-
+const marked=require('marked')
+const slugify=require('slugify')
 const articleSchema=new mongoose.Schema({
     title:{
         type:String,
@@ -16,6 +17,11 @@ const articleSchema=new mongoose.Schema({
     createdAt:{
         type:Date,
         default:Date.now()
+    },
+    slug:{
+        type:String,
+        required:true,
+        unique:true
     }
 })
 
